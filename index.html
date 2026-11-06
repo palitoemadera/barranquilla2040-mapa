@@ -688,6 +688,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   .nota { font-size:12px; line-height:1.45; color:var(--gris); margin-top:18px; border-top:1px solid var(--borde); padding-top:12px; }
   .nota b { color:#C8524A; letter-spacing:.08em; }
   #mapa { height:100%; background:#F1ECE3; }
+  .base-osm { filter: grayscale(1) contrast(.8) brightness(1.12); opacity:.45; }
   .leaflet-popup-content { font-family:"Nunito Sans",sans-serif; font-size:13.5px; line-height:1.45; margin:12px 14px; }
   .pop-capa { font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; font-weight:700; margin-bottom:3px; }
   .pop-nombre { font-weight:800; font-size:15px; margin-bottom:4px; }
@@ -716,7 +717,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
       <div class="acciones"><button id="todo">Ver todo</button><button id="nada">Ocultar todo</button></div>
       <div id="leyenda"></div>
       <div class="nota"><b>ESQUEMÁTICO.</b> Los trazados de metro, el tren de cercanías y el soterrado son esquemáticos; las estaciones tienen ubicación ilustrativa. El soterrado de la calle 30 va por el mismo corredor del metro.<br><br>
-      Fuente: OpenStreetMap (límites, localidades, caños, Transmetro, cárceles y techos); propuestas del autor y de prensa citadas en el StoryMap. Mapa base: © OpenStreetMap, © CARTO. Elaboración: Pablo Madera Granados, 6 de noviembre de 2026. WGS 84.</div>
+      Fuente: OpenStreetMap (límites, localidades, caños, Transmetro, cárceles y techos); propuestas del autor y de prensa citadas en el StoryMap. Mapa base: © OpenStreetMap. Elaboración: Pablo Madera Granados, 6 de noviembre de 2026. WGS 84.</div>
     </div>
   </aside>
   <div id="mapa" role="region" aria-label="Mapa de propuestas para Barranquilla"></div>
@@ -752,8 +753,8 @@ const esc = t => String(t??'').replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>
 const G = Object.fromEntries(GRUPOS.map(g=>[g.k,g]));
 
 const mapa = L.map('mapa', { zoomControl:true, attributionControl:true, preferCanvas:false }).setView([10.975,-74.81], 12);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-  attribution:'© OpenStreetMap · © CARTO', subdomains:'abcd', maxZoom:19 }).addTo(mapa);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom:19, className:'base-osm' }).addTo(mapa);
 L.control.scale({ imperial:false, position:'bottomleft' }).addTo(mapa);
 
 // base
